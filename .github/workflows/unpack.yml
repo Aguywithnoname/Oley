@@ -1,0 +1,23 @@
+# One-time helper: unpacks oley-src.tgz (uploaded through the website, which can't take 200 files at once)
+# into the repository, then removes it. Safe to delete this file afterwards.
+name: Unpack upload
+on:
+  push:
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  unpack:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Unpack the upload
+        run: |
+          if ! ls oley-src.tgz* >/dev/null 2>&1; then echo "nothing to unpack"; exit 0; fi
+          cat oley-src.tgz* | tar -xzf -
+          git rm -q oley-src.tgz*
+          git config user.name "Aguywithnoname"
+          git config user.email "95157241+Aguywithnoname@users.noreply.github.com"
+          git add -A
+          git commit -q -m "Oley 2.1.0"
+          git push
