@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oley Settings</title>
+<link rel="stylesheet" href="css/view.css">
+<link rel="stylesheet" href="css/settings.css">
+<link rel="stylesheet" href="css/welcome.css">
+<link rel="icon" href="img/brand/logo.svg">
+</head>
+<body class="settings">
+<div class="app">
+  <aside class="side">
+    <div class="brand" data-brand="lockup"></div>
+    <nav class="nav" id="nav">
+      <a data-go="now"><svg viewBox="0 0 24 24"><path d="M9 18V6l11-2v12M9 18a3 3 0 1 1-3-3 3 3 0 0 1 3 3Zm11-2a3 3 0 1 1-3-3 3 3 0 0 1 3 3Z"/></svg>Now playing</a>
+      <a data-go="look"><svg viewBox="0 0 24 24"><path d="M4 5h16v11H4zM8 20h8M12 16v4"/></svg>Lyrics modes</a>
+      <a data-go="cinema"><svg viewBox="0 0 24 24"><path d="M3 6h18v12H3zM3 10h18M7 6v4M12 6v4M17 6v4"/></svg>Cinema &amp; screens</a>
+      <a data-go="glow"><svg viewBox="0 0 24 24"><path d="M4 4h16v16H4z"/><path d="M7 7h10v10H7z" opacity=".5"/></svg>Glow</a>
+      <a data-go="wall"><svg viewBox="0 0 24 24"><path d="M3 5h18v12H3zM8 21h8M12 17v4M7 13l3-3 3 3 2-2 3 3"/></svg>Wallpaper</a>
+      <a data-go="system"><svg viewBox="0 0 24 24"><path d="M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-1.8-.3 1.6 1.6 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.6 1.6 0 0 0-1-1.5 1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0 .3-1.8 1.6 1.6 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.6 1.6 0 0 0 1.5-1 1.6 1.6 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.6 1.6 0 0 0 1.8.3h0a1.6 1.6 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.6 1.6 0 0 0 1 1.5 1.6 1.6 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8v0a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.6 1.6 0 0 0-1.5 1Z"/></svg>System</a>
+      <a data-go="about"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.01"/></svg>About</a>
+    </nav>
+    <div class="side-np" id="sideNp"><i id="sideArt"></i><div><b id="sideTitle">Nothing playing</b><span id="sideArtist"></span></div></div>
+    <div class="side-foot"><span id="ver">Oley</span><button class="ghost danger" data-act="quit">Quit</button></div>
+  </aside>
+
+  <main class="main" id="main">
+    <div class="offline" id="offline">Connecting to Oley…</div>
+
+    <!-- ================= now playing -->
+    <section id="now">
+      <div class="hero card" id="heroCard">
+        <div class="hero-bg" id="heroBg"></div>
+        <div class="hero-in">
+          <div class="hero-art" id="heroArt"></div>
+          <div class="hero-info">
+            <div class="hero-app" id="heroApp">Spotify</div>
+            <div class="hero-title" id="heroTitle">Play something on Spotify</div>
+            <div class="hero-artist" id="heroArtist">Oley follows what Spotify is playing.</div>
+            <div class="hero-prog"><span id="tA">0:00</span><div class="bar" id="bar"><i id="barFill"></i></div><span id="tB">0:00</span></div>
+            <div class="hero-ctl">
+              <button class="round" data-act="prev" title="Previous"><svg viewBox="0 0 24 24"><path d="M6 5v14M19 5 9 12l10 7z" fill="currentColor"/></svg></button>
+              <button class="round big" data-act="play_pause" title="Play / pause" id="ppBtn"><svg viewBox="0 0 24 24" id="ppIcon"><path d="M8 5v14l11-7z" fill="currentColor"/></svg></button>
+              <button class="round" data-act="next" title="Next"><svg viewBox="0 0 24 24"><path d="M18 5v14M5 5l10 7-10 7z" fill="currentColor"/></svg></button>
+              <span class="chip" id="lyrChip">No lyrics yet</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="actions">
+        <button class="cta" id="cinemaBtn" data-act="cinema_toggle"><span class="dot"></span><b id="cinemaLbl">Cinema</b><small>Ctrl+Alt+L</small></button>
+        <button class="cta alt" data-act="window_open" id="windowBtn"><b>Open in a window</b><small>Resizable · F for full screen</small></button>
+      </div>
+      <div class="card">
+        <div class="row"><div><div class="t">Lyrics timing</div><div class="d">Move right if the words show up late, left if they come too early.</div></div>
+          <div class="slider"><input type="range" min="-2" max="2" step="0.05" data-set="offset" id="offset"><output id="offsetOut">0.0 s</output></div></div>
+        <div class="row"><div><div class="t">Song card at the start</div><div class="d">Shows the cover, title and controls for a few seconds when a song begins.</div></div><label class="sw"><input type="checkbox" data-set="intro"><i></i></label></div>
+        <div class="row"><div><div class="t">Lyrics not found?</div><div class="d">Oley uses LRCLIB. You can also drop an <code>Artist - Title.lrc</code> file in the lyrics folder.</div></div>
+          <div class="btns"><button class="ghost" data-act="lyrics_reload">Search again</button><button class="ghost" data-act="open_lyrics_folder">Lyrics folder</button></div></div>
+      </div>
+    </section>
+
+    <!-- ================= modes -->
+    <section id="look">
+      <h2>Lyrics modes</h2>
+      <p class="lead">How the words appear in Cinema and the window. Auto picks a mode that fits each song's mood.</p>
+      <div class="preview card" id="previewCard"><iframe id="preview" title="Preview"></iframe><div class="pv-label" id="pvLabel">Preview</div></div>
+      <div class="modes" id="modes"></div>
+      <div class="card opts" id="modeOpts"></div>
+    </section>
+
+    <!-- ================= cinema -->
+    <section id="cinema">
+      <h2>Cinema &amp; screens</h2>
+      <p class="lead">Cinema fills a screen with the lyrics. Turn it on and off with <kbd>Ctrl</kbd>+<kbd>Alt</kbd>+<kbd>L</kbd>, from the tray, or here. With two screens, give each its own mode.</p>
+      <div class="card" id="displays"></div>
+      <div class="card">
+        <div class="row"><div><div class="t">Close Cinema on any key or click</div><div class="d">Moving the mouse doesn't close it.</div></div><label class="sw"><input type="checkbox" data-set="cinema.close_on_input"><i></i></label></div>
+        <div class="row"><div><div class="t">Open Cinema by itself when I'm away</div><div class="d">Like a screensaver, while music is playing. Comes back down when you return.</div></div>
+          <select data-set="cinema.away_minutes" data-num="1"><option value="0">Never</option><option value="2">After 2 minutes</option><option value="5">After 5 minutes</option><option value="10">After 10 minutes</option><option value="20">After 20 minutes</option></select></div>
+        <div class="row"><div><div class="t">Keep the screen awake in Cinema</div></div><label class="sw"><input type="checkbox" data-set="cinema.keep_awake"><i></i></label></div>
+        <div class="row"><div><div class="t">Shortcut Ctrl+Alt+L</div><div class="d" id="hotkeyNote">Turns Cinema on and off from anywhere.</div></div><label class="sw"><input type="checkbox" data-set="cinema.hotkey"><i></i></label></div>
+      </div>
+    </section>
+
+    <!-- ================= glow -->
+    <section id="glow">
+      <h2>Glow</h2>
+      <p class="lead">A soft light around the edges of the screen, coloured by the cover and pulsing with the music.</p>
+      <div class="card">
+        <div class="row" id="glowRow"><div><div class="t">Glow around the screen while I work</div><div class="d">Hides itself for full-screen games and videos.</div></div><label class="sw"><input type="checkbox" data-set="glow.desktop"><i></i></label></div>
+        <div class="row"><div><div class="t">Glow inside Cinema</div></div>
+          <div class="seg" data-set="glow.cinema"><button data-v="auto">Per mode</button><button data-v="on">Always</button><button data-v="off">Never</button></div></div>
+        <div class="row"><div><div class="t">Brightness</div></div><div class="slider"><input type="range" min="0.2" max="1.4" step="0.05" data-set="glow.intensity" id="glowI"><output id="glowIOut"></output></div></div>
+        <div class="row"><div><div class="t">Colour</div></div>
+          <div class="btns"><div class="seg" data-set="glow.color"><button data-v="cover">From the cover</button><button data-v="custom">My colour</button></div><input type="color" data-set="glow.custom" id="glowCol"></div></div>
+        <div class="row"><div><div class="t">Pulse with the music</div></div><label class="sw"><input type="checkbox" data-set="glow.react"><i></i></label></div>
+        <div class="row"><div><div class="t">Notch shape</div><div class="d">Bends the Cinema glow around a notch at the top, like a MacBook.</div></div><label class="sw"><input type="checkbox" data-set="glow.notch"><i></i></label></div>
+      </div>
+    </section>
+
+    <!-- ================= wallpaper -->
+    <section id="wall">
+      <h2>Wallpaper Engine</h2>
+      <p class="lead">Put the lyrics on your desktop wallpaper, behind your windows. Oley installs a web wallpaper that follows the app.</p>
+      <div class="card">
+        <div class="row"><div><div class="t" id="weTitle">Looking for Wallpaper Engine…</div><div class="d" id="weNote"></div></div><button class="primary" data-act="we_install" id="weBtn">Install</button></div>
+        <div class="row"><div><div class="t">Mode on the wallpaper</div></div><select data-set="wallpaper.mode" id="weMode"></select></div>
+      </div>
+    </section>
+
+    <!-- ================= system -->
+    <section id="system">
+      <h2>System</h2>
+      <div class="card">
+        <div class="row"><div><div class="t">Start with Windows</div><div class="d">Starts quietly in the tray.</div></div><label class="sw"><input type="checkbox" data-set="system.autostart"><i></i></label></div>
+        <div class="row"><div><div class="t">When I close this window</div></div>
+          <div class="seg" data-set="system.close_button"><button data-v="ask">Ask</button><button data-v="keep">Keep running</button><button data-v="quit">Quit</button></div></div>
+        <div class="row"><div><div class="t">Only follow Spotify</div><div class="d">Off: follow whatever is playing (browser, Apple Music, YouTube Music…).</div></div><label class="sw"><input type="checkbox" data-set="player.only_spotify"><i></i></label></div>
+        <div class="row"><div><div class="t">Sharper covers</div><div class="d">Looks up a large version of the cover. Windows only shares a small one.</div></div><label class="sw"><input type="checkbox" data-set="player.hd_covers"><i></i></label></div>
+        <div class="row"><div><div class="t">React to the music</div><div class="d" id="audioNote">Listens to the PC's sound output for beats. Nothing is recorded.</div></div><label class="sw"><input type="checkbox" data-set="audio.enabled"><i></i></label></div>
+        <div class="row"><div><div class="t">Performance</div><div class="d">Light is gentler on older graphics.</div></div>
+          <div class="seg" data-set="perf"><button data-v="smooth">Smooth</button><button data-v="balanced">Balanced</button><button data-v="light">Light</button></div></div>
+        <div class="row"><div><div class="t">Clock</div><div class="d">The lock-screen clock in Constellation.</div></div><label class="sw"><input type="checkbox" data-set="clock"><i></i></label></div>
+        <div class="row"><div><div class="t">Troubleshooting</div><div class="d" id="sysNote"></div></div>
+          <div class="btns"><button class="ghost" data-act="open_log">Open log</button><button class="ghost" data-act="open_data">Data folder</button><button class="ghost" data-act="reload_views">Reload windows</button></div></div>
+      </div>
+    </section>
+
+    <!-- ================= about (the name, logo and credit come from js/brand.js and aren't settings) -->
+    <section id="about">
+      <h2>About</h2>
+      <div class="card about">
+        <div class="about-top"><div class="about-mark" data-brand="hero"></div>
+          <div class="about-meta"><span id="aboutVer">Version</span><span>Open source · GPL-3.0</span></div></div>
+        <div class="row"><div><div class="t">Make your own lyrics mode</div><div class="d">Ask your AI (like Claude) to make one. New modes go in the <code>custom-modes</code> folder and show up here by themselves. Or write one yourself: <code>MAKING-MODES.md</code> shows how.</div></div>
+          <div class="btns"><button class="ghost" data-act="open_custom">Open the folder</button></div></div>
+        <div class="row"><div><div class="t">Welcome tour</div><div class="d">The quick walk through Oley from the first time you opened it.</div></div>
+          <div class="btns"><button class="ghost" id="tourAgain">Show it again</button></div></div>
+        <div class="row"><div><div class="t">Thanks to</div><div class="d">Lyrics from LRCLIB. Fonts: Inter, Anton, Archivo Black, Lora, Poppins (SIL Open Font License) and DejaVu Sans Mono. Emoji: Microsoft Fluent Emoji (MIT).</div></div></div>
+      </div>
+    </section>
+  </main>
+</div>
+<div class="toast" id="toast"></div>
+<script src="js/core.js"></script>
+<script src="js/brand.js"></script>
+<script src="js/welcome.js"></script>
+<script src="js/settings.js"></script>
+</body>
+</html>

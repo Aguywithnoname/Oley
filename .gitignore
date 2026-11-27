@@ -1,0 +1,17 @@
+# your settings, logs, caches, downloaded models and emoji (made when Oley runs)
+data/
+# the private Python environment Start Oley.bat makes
+.venv/
+__pycache__/
+*.pyc
+*.log
+# editor and OS clutter
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# what the installer build makes
+build/
+dist/

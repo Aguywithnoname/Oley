@@ -1,0 +1,9 @@
+PySide6-Essentials>=6.7
+winrt-runtime>=2.3
+winrt-Windows.Foundation>=2.3
+winrt-Windows.Foundation.Collections>=2.3
+winrt-Windows.Media.Control>=2.3
+winrt-Windows.Storage.Streams>=2.3
+numpy>=1.26
+psutil>=5.9
+# optional extras, installed separately by "Start Oley.bat": PyAudioWPatch (beats), onnxruntime + Pillow (AI cut-outs)

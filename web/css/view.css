@@ -1,0 +1,88 @@
+/* Oley renderer: base layers and shared components */
+@font-face { font-family: 'Oley Sans'; src: url(../fonts/Inter-Regular.woff) format('woff'); font-weight: 400; font-display: block; }
+@font-face { font-family: 'Oley Sans'; src: url(../fonts/Inter-Medium.woff) format('woff'); font-weight: 500; font-display: block; }
+@font-face { font-family: 'Oley Sans'; src: url(../fonts/Inter-SemiBold.woff) format('woff'); font-weight: 600; font-display: block; }
+@font-face { font-family: 'Oley Sans'; src: url(../fonts/Inter-Bold.woff) format('woff'); font-weight: 700; font-display: block; }
+@font-face { font-family: 'Oley Sans'; src: url(../fonts/Inter-Black.woff) format('woff'); font-weight: 900; font-display: block; }
+@font-face { font-family: 'Oley Display'; src: url(../fonts/InterDisplay-Medium.woff) format('woff'); font-weight: 500; font-display: block; }
+@font-face { font-family: 'Oley Display'; src: url(../fonts/InterDisplay-SemiBold.woff) format('woff'); font-weight: 600; font-display: block; }
+@font-face { font-family: 'Oley Display'; src: url(../fonts/InterDisplay-Bold.woff) format('woff'); font-weight: 700; font-display: block; }
+@font-face { font-family: 'Oley Display'; src: url(../fonts/InterDisplay-Black.woff) format('woff'); font-weight: 900; font-display: block; }
+@font-face { font-family: 'Oley Heavy'; src: url(../fonts/Anton-Regular.woff) format('woff'); font-weight: 400; font-display: block; }
+@font-face { font-family: 'Oley Black'; src: url(../fonts/ArchivoBlack-Regular.woff) format('woff'); font-weight: 400; font-display: block; }
+@font-face { font-family: 'Oley Serif'; src: url(../fonts/Lora-Variable.woff) format('woff'); font-weight: 400 700; font-style: normal; font-display: block; }
+@font-face { font-family: 'Oley Serif'; src: url(../fonts/Lora-Italic-Variable.woff) format('woff'); font-weight: 400 700; font-style: italic; font-display: block; }
+@font-face { font-family: 'Oley Round'; src: url(../fonts/Poppins-Regular.woff) format('woff'); font-weight: 400; font-display: block; }
+@font-face { font-family: 'Oley Round'; src: url(../fonts/Poppins-Medium.woff) format('woff'); font-weight: 500; font-display: block; }
+@font-face { font-family: 'Oley Round'; src: url(../fonts/Poppins-Bold.woff) format('woff'); font-weight: 700; font-display: block; }
+@font-face { font-family: 'Oley Mono'; src: url(../fonts/DejaVuSansMono.woff) format('woff'); font-weight: 400; font-display: block; }
+@font-face { font-family: 'Oley Mono'; src: url(../fonts/DejaVuSansMono-Bold.woff) format('woff'); font-weight: 700; font-display: block; }
+
+:root {
+  --vivid: #ff46a0;
+  --second: #7846ff;
+  --dark: #0c0816;
+  --light: #f0e6ff;
+  --emoji: 'Segoe UI Emoji', 'Apple Color Emoji', 'Noto Color Emoji', sans-serif;
+  --mono: 'Cascadia Code', 'Cascadia Mono', 'Oley Mono', Consolas, monospace;
+  --hand: 'Ink Free', 'Segoe Print', 'Bradley Hand', 'Comic Sans MS', cursive;
+}
+html, body {
+  margin: 0; height: 100%; overflow: hidden; background: #000;
+  -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+  user-select: none; -webkit-user-select: none;
+}
+body.role-cinema, body.hide-cursor { cursor: none; }
+#stage { position: fixed; inset: 0; overflow: hidden; background: #000; }
+.layer { position: absolute; inset: 0; pointer-events: none; }
+.mode-root { position: absolute; inset: 0; overflow: hidden; contain: strict; }
+
+/* ---------- edge glow */
+.glow {
+  mix-blend-mode: screen; overflow: hidden;
+  -webkit-mask-size: 100% 100%; mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+}
+.glow-color { position: absolute; left: 50%; top: 50%; width: 170vmax; height: 170vmax; transform: translate(-50%, -50%); will-change: transform; }
+
+/* ---------- song intro card */
+.intro { z-index: 5; }
+.np-card {
+  position: absolute; left: 50%; top: 50%; width: min(32vmin, 400px);
+  padding: 2vmin 2vmin 1.7vmin; box-sizing: border-box; border-radius: 2.6vmin;
+  background: rgba(20, 20, 26, 0.6); backdrop-filter: blur(26px) saturate(1.5); -webkit-backdrop-filter: blur(26px) saturate(1.5);
+  box-shadow: 0 3vmin 9vmin rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  color: #fff; text-align: center; font-family: 'Oley Sans', 'Segoe UI', sans-serif; opacity: 0;
+  will-change: transform, opacity, filter;
+}
+.np-art { width: 100%; aspect-ratio: 1; border-radius: 1.5vmin; background: #1b1b22 center / cover no-repeat; box-shadow: 0 1.4vmin 4vmin rgba(0, 0, 0, 0.55); }
+.np-title { margin-top: 1.5vmin; font-weight: 600; font-size: 2vmin; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: -0.01em; }
+.np-artist { margin-top: 0.3vmin; font-size: 1.6vmin; opacity: 0.6; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.np-ctl { display: flex; justify-content: center; align-items: center; gap: 1.7vmin; margin-top: 1.5vmin; color: rgba(255, 255, 255, 0.85); }
+.np-ctl svg { width: 2vmin; height: 2vmin; display: block; }
+.np-play { width: 4.4vmin; height: 4.4vmin; border-radius: 50%; background: rgba(255, 255, 255, 0.16); display: grid; place-items: center; }
+.np-play svg { width: 2.2vmin; height: 2.2vmin; }
+.np-pill { display: inline-block; margin-top: 1.3vmin; padding: 0.45vmin 1.3vmin; border-radius: 99px; background: rgba(255, 255, 255, 0.1); font-size: 1.3vmin; font-weight: 500; color: rgba(255, 255, 255, 0.8); }
+
+/* ---------- lock-screen clock */
+.lock-clock { position: absolute; left: 0; right: 0; top: 7vh; text-align: center; color: rgba(255, 255, 255, 0.86); z-index: 2; }
+.lc-date { font-family: 'Oley Sans', sans-serif; font-weight: 500; font-size: 1.45vmin; opacity: 0.78; letter-spacing: 0.02em; }
+.lc-time { font-family: 'Oley Serif', Georgia, serif; font-weight: 500; font-size: 8.6vmin; line-height: 1.05; letter-spacing: -0.01em; text-shadow: 0 0 4vmin rgba(0, 0, 0, 0.25); }
+
+/* ---------- idle */
+.idle { z-index: 6; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.idle .lock-clock { position: static; }
+.idle .lc-time { font-size: 14vmin; }
+.idle-msg { margin-top: 2vmin; font-family: 'Oley Sans', sans-serif; font-size: 1.7vmin; color: rgba(255, 255, 255, 0.55); letter-spacing: 0.01em; }
+
+/* ---------- status line */
+.hud { z-index: 7; }
+.hud-msg { position: absolute; left: 2.2vmin; bottom: 2vmin; font: 500 1.35vmin 'Oley Sans', sans-serif; color: rgba(255, 255, 255, 0.85); text-shadow: 0 1px 6px rgba(0, 0, 0, 0.6); opacity: 0; transition: opacity 0.4s; }
+.hud-err { position: absolute; left: 2.2vmin; bottom: 4.2vmin; max-width: 70vw; font: 1.2vmin var(--mono); color: #ff6b6b; opacity: 0; transition: opacity 0.4s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.role-thumb .hud, .role-preview .hud-err { display: none; }
+
+/* ---------- Light performance: fewer big blurs for weaker graphics */
+.perf-light .np-card { backdrop-filter: none; -webkit-backdrop-filter: none; background: rgba(20, 20, 26, 0.94); }
+.perf-light .m-cs .cs-art { filter: blur(40px) saturate(1.7) brightness(0.5); }
+.perf-light .m-cs .cs-art.b, .perf-light .m-cs .cs-smoke, .perf-light .m-nb .nb-sky.b { display: none; }
+.perf-light .m-st .st-mesh { filter: blur(16px); }
