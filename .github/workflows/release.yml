@@ -1,14 +1,11 @@
 # Builds the Windows installer (Oley-Setup-x.y.z.exe) and a portable zip.
-# - Publish a release on GitHub (tag like v2.1.0): both files are attached to it.
-# - Push a tag like v2.1.0: a release is made with them.
+# - Publish a release on GitHub (tag like v2.1.0): both files are attached to it a few minutes later.
 # - Run it by hand from the Actions tab: they're kept as a download on the run.
 name: Build Windows installer
 
 on:
   release:
     types: [published]
-  push:
-    tags: ['v*']
   workflow_dispatch:
 
 permissions:
@@ -74,11 +71,10 @@ jobs:
             dist/Oley-*-portable.zip
 
       - name: Attach to the release
-        if: github.event_name == 'release' || startsWith(github.ref, 'refs/tags/')
+        if: github.event_name == 'release'
         uses: softprops/action-gh-release@v2
         with:
-          tag_name: ${{ github.event.release.tag_name || github.ref_name }}
-          body_path: ${{ github.event_name == 'push' && 'packaging/release-notes.md' || '' }}
+          tag_name: ${{ github.event.release.tag_name }}
           files: |
             dist/Oley-Setup-*.exe
             dist/Oley-*-portable.zip
