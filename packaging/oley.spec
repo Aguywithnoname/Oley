@@ -19,7 +19,7 @@ binaries = []
 hidden = []
 
 # Windows' media controls (what's playing on Spotify) come through the winrt projection packages
-for pkg in ('winrt.runtime', 'winrt.system', 'winrt.windows.foundation', 'winrt.windows.foundation.collections',
+for pkg in ('winrt', 'winrt.runtime', 'winrt.system', 'winrt.windows.foundation', 'winrt.windows.foundation.collections',
             'winrt.windows.media.control', 'winrt.windows.storage.streams'):
     try:
         d, b, h = collect_all(pkg)
@@ -31,10 +31,11 @@ try:
 except Exception:
     pass
 # beat detection and the AI cut-out are optional: bundled when installed, skipped when not
+# (PyInstaller's own hooks cover onnxruntime and Pillow; this makes sure their DLLs come along)
 for pkg in ('pyaudiowpatch', 'onnxruntime', 'PIL'):
     try:
         binaries += collect_dynamic_libs(pkg)
-        hidden += collect_submodules(pkg)
+        hidden.append(pkg)
     except Exception:
         pass
 
